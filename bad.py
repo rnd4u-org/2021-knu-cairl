@@ -1,0 +1,3 @@
+BadStandards = "lllllllllllllllllllllllllllllllllllllooooooooooooooooooooooooooooooooooooooooooooooooooooooonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnggggggggggggggggggggggggggg"
+
+import wat
