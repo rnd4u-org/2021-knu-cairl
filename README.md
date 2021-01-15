@@ -24,7 +24,7 @@ If you are using Jupyter Notebook (or JupyterLab) you need to export code to `*.
 
 ## Code style
 
-This project follows [PEP8 standart](https://www.python.org/dev/peps/pep-0008/) with automatic style verification 
+This project follows [PEP8 standard](https://www.python.org/dev/peps/pep-0008/) with automatic style verification 
 
 ## Libraries used
 You may refer to this sites for documentation
