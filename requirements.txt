@@ -2,3 +2,5 @@ jupyter==1.0.0
 matplotlib==3.3.3
 pandas==1.2.1
 sklearn
+flake8
+pycodestyle_magic

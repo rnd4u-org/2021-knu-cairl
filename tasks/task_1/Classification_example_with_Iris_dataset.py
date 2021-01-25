@@ -16,20 +16,28 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 
 
+# In[2]:
+
+
+get_ipython().run_line_magic('load_ext', 'pycodestyle_magic')
+get_ipython().run_line_magic('flake8_on', '')
+
+
 # # Classification example with Iris dataset
 
 # This example dataset task is in classifying flower based on its features
 
-# In[2]:
+# In[3]:
 
 
-iris = datasets.load_iris() # This dataset boult in `sklearn` library so you can load it directly
+# This dataset boult in `sklearn` library so you can load it directly
+iris = datasets.load_iris()
 iris_features = iris['feature_names']
 
 
 # Print all flowers and features
 
-# In[3]:
+# In[4]:
 
 
 print(f"Dataset features:\n{iris['feature_names']}")
@@ -40,10 +48,10 @@ print(f"Dataset classes:\n{iris.target_names}")
 # 
 # As we are limited by 2D displays and cannot visualize 4d data in a single plot - let's print data 2-axis at a time
 
-# In[4]:
+# In[5]:
 
 
-for j in [1,2,3]:
+for j in [1, 2, 3]:
     for i, class_name in enumerate(iris.target_names):
         sepal_length = iris.data[:, 0][iris.target == i]
         sepal_width = iris.data[:, j][iris.target == i]
@@ -62,7 +70,7 @@ for j in [1,2,3]:
 # 
 # For this let's focus on first 2 features ('sepal length (cm)', 'sepal width (cm)') to have consistent 2D plot
 
-# In[5]:
+# In[6]:
 
 
 def plot_decision(clf, title):
@@ -88,15 +96,15 @@ def plot_decision(clf, title):
     plt.show()
 
 
-# In[6]:
+# In[7]:
 
 
 # Select first 2 features
-X = iris.data[:, [0,1]]
+X = iris.data[:, [0, 1]]
 y = iris.target
 
 
-# In[7]:
+# In[8]:
 
 
 l_regression = LogisticRegression()
@@ -108,7 +116,7 @@ plot_decision(l_regression, title="Log regression")
 # 
 # To divide classes properly we need to introduce non-linear models such and Neural Networks or Decision Trees
 
-# In[8]:
+# In[9]:
 
 
 tree = DecisionTreeClassifier()
@@ -124,10 +132,10 @@ plot_decision(tree, title="Decision Tree")
 # You train model on some part of the dataset (lets say 67%, or 75%) and that you check if you model generalizes well by prediction on data that left 
 # 
 
-# In[9]:
+# In[10]:
 
 
-X = iris.data # Use all iris features as predictors 
+X = iris.data  # Use all iris features as predictors
 y = iris.target
 
 
@@ -135,13 +143,15 @@ y = iris.target
 # 
 # Set `test_size=0.25` to use 25% data for test and 75% for train
 
-# In[10]:
-
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=117)
-
-
 # In[11]:
+
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=117
+)
+
+
+# In[12]:
 
 
 # function for printing results
@@ -157,7 +167,7 @@ def eval_model(clf, X_test, y_test):
 
 # Train model on `train` data 
 
-# In[12]:
+# In[13]:
 
 
 l_regression = LogisticRegression()
@@ -166,7 +176,7 @@ l_regression = l_regression.fit(X_train, y_train)
 
 # And evaluate on `test` data 
 
-# In[13]:
+# In[14]:
 
 
 eval_model(l_regression, X_test, y_test)
