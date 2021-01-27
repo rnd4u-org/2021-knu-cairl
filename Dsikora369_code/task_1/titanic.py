@@ -135,6 +135,7 @@ train
 
 """Creating function for data preprocessing and dividing into training and validation data."""
 
+
 def get_title(name):
     pattern = r'([A-Za-z]+)\.'
     title_search = re.search(pattern, name)
@@ -253,11 +254,8 @@ validation_dataset = (
 
 """**Creating model**"""
 model = tf.keras.Sequential([
-              Dense(12, activation=tf.nn.leaky_relu, input_shape=[9]),
-              Dropout(0.2),
-              Dense(5, activation=tf.nn.leaky_relu),
-              Dense(2, activation=tf.nn.softmax)
-])
+    Dense(12, activation=tf.nn.leaky_relu, input_shape=[9]), Dropout(0.2), 
+    Dense(5, activation=tf.nn.leaky_relu),Dense(2, activation=tf.nn.softmax)])
 opt = tf.keras.optimizers.Adam(
     learning_rate=0.01, beta_1=0.9, beta_2=0.999, epsilon=1e-07, amsgrad=True,
     name='Adam'
@@ -283,9 +281,6 @@ test_dataset = load_data("test.csv")
 Y_pred = model.predict(test_dataset)
 Y_pred = (Y_pred[:, 1] >= 0.8).astype(int)
 
-submission = pd.DataFrame({
-        "PassengerId": test_ids,
-        "Survived": Y_pred
-    })
+submission = pd.DataFrame({"PassengerId": test_ids,"Survived": Y_pred})
 submission.to_csv('/content/titanic.csv', index=False)
 print('Done!')
