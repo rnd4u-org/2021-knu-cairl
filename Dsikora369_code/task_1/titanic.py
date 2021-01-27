@@ -17,6 +17,11 @@ import pandas as pd
 import numpy as np
 import re
 from google.colab import files
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+import tensorflow as tf
+import math
+from tensorflow.keras.layers import Dense, Dropout
 files.upload()  # here you will download kaggle.json
 
 """Set permission to before downloading Titanic dataset."""
@@ -92,17 +97,15 @@ train[['CategoricalAge', 'Survived']].groupby(['CategoricalAge'],
 
 """We can find out different titles of passangers."""
 
-# Commented out IPython magic to ensure Python compatibility.
-# %%flake8
-# def get_title(name):
-#     title_search = re.search(r'([A-Za-z]+)\.', name)
-#     if title_search:
-#         return title_search.group(1)
-#     return ""
-# 
-# 
-# train['Title'] = train['Name'].apply(get_title)
-# pd.crosstab(train['Title'], train['Sex'])
+def get_title(name):
+    title_search = re.search(r'([A-Za-z]+)\.', name)
+    if title_search:
+        return title_search.group(1)
+    return ""
+
+
+train['Title'] = train['Name'].apply(get_title)
+pd.crosstab(train['Title'], train['Sex'])
 
 """So we can transform titles to categorical."""
 
@@ -136,11 +139,6 @@ train = train.drop(drop_elements, axis=1)
 train
 
 """Creating function for data preprocessing and dividing into training and validation data."""
-
-from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import train_test_split
-import tensorflow as tf
-
 
 def get_title(name):
     pattern = r'([A-Za-z]+)\.'
@@ -262,9 +260,6 @@ validation_dataset = (
 
 """
 
-import tensorflow as tf
-import math
-from tensorflow.keras.layers import Dense, Dropout
 model = tf.keras.Sequential([
               Dense(12, activation=tf.nn.leaky_relu, input_shape=[9]),
               Dropout(0.2),
