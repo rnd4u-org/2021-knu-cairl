@@ -26,17 +26,10 @@ files.upload()  # here you will download kaggle.json
 
 """Set permission to before downloading Titanic dataset."""
 
-!pip install -q kaggle
-!mkdir -p ~/.kaggle
-!cp kaggle.json ~/.kaggle/
-!ls ~/.kaggle
-!chmod 600 /root/.kaggle/kaggle.json  # set permission
 
 """Downloading dataset.
 
 """
-
-!kaggle competitions download -c titanic
 
 """Getting our data.
 
@@ -72,6 +65,7 @@ train[['CategoricalFare', 'Survived']].groupby(
 
 """
 
+
 def get_cabin(cabin):
     for i in str(cabin):
         if i in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'Z']:
@@ -96,6 +90,7 @@ train[['CategoricalAge', 'Survived']].groupby(['CategoricalAge'],
                                               as_index=False).mean()
 
 """We can find out different titles of passangers."""
+
 
 def get_title(name):
     title_search = re.search(r'([A-Za-z]+)\.', name)
@@ -256,10 +251,7 @@ validation_dataset = (
     )
 )
 
-"""**Creating model**
-
-"""
-
+"""**Creating model**"""
 model = tf.keras.Sequential([
               Dense(12, activation=tf.nn.leaky_relu, input_shape=[9]),
               Dropout(0.2),
