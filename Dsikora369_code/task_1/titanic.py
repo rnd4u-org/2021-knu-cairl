@@ -255,7 +255,7 @@ validation_dataset = (
 """**Creating model**"""
 model = tf.keras.Sequential([
     Dense(12, activation=tf.nn.leaky_relu, input_shape=[9]), Dropout(0.2), 
-    Dense(5, activation=tf.nn.leaky_relu),Dense(2, activation=tf.nn.softmax)])
+    Dense(5, activation=tf.nn.leaky_relu), Dense(2, activation=tf.nn.softmax)])
 opt = tf.keras.optimizers.Adam(
     learning_rate=0.01, beta_1=0.9, beta_2=0.999, epsilon=1e-07, amsgrad=True,
     name='Adam'
@@ -271,7 +271,7 @@ train_dataset = training_dataset.cache().repeat().shuffle(
     num_train_examples).batch(BATCH_SIZE)
 val_dataset = validation_dataset.cache().batch(BATCH_SIZE)
 model.fit(train_dataset, validation_data=val_dataset, epochs=1000,
-          steps_per_epoch=math.ceil(num_train_examples/BATCH_SIZE))
+          steps_per_epoch=math.ceil(num_train_examples / BATCH_SIZE))
 
 """Predicting and saving."""
 
@@ -281,6 +281,6 @@ test_dataset = load_data("test.csv")
 Y_pred = model.predict(test_dataset)
 Y_pred = (Y_pred[:, 1] >= 0.8).astype(int)
 
-submission = pd.DataFrame({"PassengerId": test_ids,"Survived": Y_pred})
+submission = pd.DataFrame({"PassengerId": test_ids, "Survived": Y_pred})
 submission.to_csv('/content/titanic.csv', index=False)
 print('Done!')
