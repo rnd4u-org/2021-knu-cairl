@@ -241,9 +241,11 @@ For example, if we're missing the age of a 1st class passenger, who is female, w
 We could substitute in the age of other passengers who fit that description.
 """
 
+# %%flake8
+
+
 def find_similar_passengers(id, dataset):
-    subset = dataset[(dataset.title == dataset.title[id]) &
-                     (dataset.Pclass == dataset.Pclass[id])]
+    subset = dataset[(dataset.title == dataset.title[id]) & (dataset.Pclass == dataset.Pclass[id])]
 
     if subset["Age"].mean() == "NaN":
         subset = dataset[(dataset["sex_class"] == dataset.iloc[id]["sex_class"])]
@@ -253,6 +255,7 @@ def find_similar_passengers(id, dataset):
 
     age = subset["Age"].mean()
     return age
+
 
 no_ages = train_data[train_data["Age"].isna()].index
 for pid in no_ages:
