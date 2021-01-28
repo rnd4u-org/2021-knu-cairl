@@ -7,43 +7,39 @@ Original file is located at
     https://colab.research.google.com/drive/1aaicWi27KIIZD1w9Zbitt-1bzGTrNxXp
 """
 
-# Commented out IPython magic to ensure Python compatibility.
+import warnings
+import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-pd.options.mode.chained_assignment = None 
-# %matplotlib inline
-import warnings
-warnings.filterwarnings('ignore')
-!pip install catboost
-
-pip install flake8 pycodestyle_magic
-
-# Commented out IPython magic to ensure Python compatibility.
-# %load_ext pycodestyle_magic
-
-"""**1.  Load the Data**"""
-
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-import warnings
-pd.options.mode.chained_assignment = None
-# %matplotlib inline
-warnings.filterwarnings('ignore')
-
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import GridSearchCV
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from lightgbm import LGBMClassifier
+from xgboost import XGBClassifier
+from catboost import CatBoostClassifier
+from sklearn.ensemble import VotingClassifier
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 from google.colab import auth
 from oauth2client.client import GoogleCredentials
-
 from google.colab import drive
-drive.mount('/content/drive/')
 
+drive.mount('/content/drive/')
 auth.authenticate_user()
+
 gauth = GoogleAuth()
 gauth.credentials = GoogleCredentials.get_application_default()
 drive = GoogleDrive(gauth)
+
+pd.options.mode.chained_assignment = None
+# %matplotlib inline
+warnings.filterwarnings('ignore')
+
+"""**1.  Load the Data**"""
 
 train_data = drive.CreateFile({'id': '1TNpBMpZVCbvF6hgP-Gvu5Iybu1hiKJkS'})
 train_data.GetContentFile('train.csv')
@@ -71,9 +67,12 @@ Let's see how different variables are associated with survival variable
 **1)Pclass variable**
 """
 
-print(train_data["Pclass"].unique())
-train_data[['Pclass', 'Survived']].groupby(['Pclass'], as_index=False).mean(
-                                  ).sort_values(by='Survived', ascending=False)
+# Commented out IPython magic to ensure Python compatibility.
+# %%flake8
+# print(train_data["Pclass"].unique())
+# train_data[['Pclass', 'Survived']].groupby(
+#     ['Pclass'], as_index=False).mean().sort_values(
+#         by='Survived', ascending=False)
 
 """There are three classes (1, 2 and 3) representing first, second or third class tickets on the boat.
 
@@ -161,7 +160,6 @@ columns as quantitative variables and as the result will be inccorrect output.
 We just wanna show to model the belonging of passenger to the specific family and title.
 """
 
-from sklearn.preprocessing import OneHotEncoder
 oh = OneHotEncoder(handle_unknown="ignore", sparse=False)
 train_data = train_data.join(pd.DataFrame(oh.fit_transform(
     train_data[["fname", "title"]]), index=train_data.index))
@@ -188,16 +186,16 @@ But what if wealthy males have a higher survival than poor females? It might mak
 Let's create a new feature sex_class that represents all above.
 """
 
-interactions = train_data.assign(sex_class=train_data['Sex'] + "_" +
-                                 train_data['Pclass'].astype("str"))
+interactions = train_data.assign(
+    sex_class=train_data['Sex'] + "_" + train_data['Pclass'].astype("str"))
 interactions[['sex_class', 'Survived']].groupby(
-             ['sex_class'], as_index=False).mean().sort_values(
-                            by='Survived', ascending=False)
+    ['sex_class'], as_index=False).mean().sort_values(
+        by='Survived', ascending=False)
 
-train_data = train_data.assign(sex_class=train_data['Sex'] + "_" +
-                               train_data['Pclass'].astype("str"))
-test_data = test_data.assign(sex_class=test_data['Sex'] + "_" +
-                             test_data['Pclass'].astype("str"))
+train_data = train_data.assign(
+    sex_class=train_data['Sex'] + "_" + train_data['Pclass'].astype("str"))
+test_data = test_data.assign(
+    sex_class=test_data['Sex'] + "_" + test_data['Pclass'].astype("str"))
 print(train_data)
 
 """Pclass variable is encoded numerically, but it is ordinal and it will be treated the same as something like Age by most of the models.
@@ -248,8 +246,7 @@ def find_similar_passengers(id, dataset):
                      (dataset.Pclass == dataset.Pclass[id])]
 
     if subset["Age"].mean() == "NaN":
-        subset = dataset[(dataset["sex_class"] ==
-                          dataset.iloc[id]["sex_class"])]
+        subset = dataset[(dataset["sex_class"] == dataset.iloc[id]["sex_class"])]
 
     if subset["Age"].mean() == "NaN":
         subset = dataset[(dataset["sex"] == dataset.iloc[id]["sex"])]
@@ -352,9 +349,7 @@ There is at least one outlier with a fare of >500 so dropping it.
 The data is pretty skewed. Take a log transformation to reduce the skew and to decrease the massive range in fares.
 """
 
-import numpy as np
-train_data["Fare"] = train_data["Fare"].map(
-                     lambda i: np.log(i) if i > 0 else 0)
+train_data["Fare"] = train_data["Fare"].map(lambda i: np.log(i) if i > 0 else 0)
 test_data["Fare"] = test_data["Fare"].map(lambda i: np.log(i) if i > 0 else 0)
 
 g = sns.FacetGrid(train_data, col='Survived')
@@ -371,7 +366,7 @@ train_data.drop("Cabin", axis=1, inplace=True)
 test_data.drop("Cabin", axis=1, inplace=True)
 
 """**9)Embarked**
- 
+
  Let's fill in missing values as S.
 
  And encode it by using dummy variable.
@@ -403,7 +398,6 @@ In terms of our independant variables have different scale we are supposed
 to normalize it by using StandartScaler(Z-normalization).
 """
 
-from sklearn.preprocessing import StandardScaler
 ss = StandardScaler()
 
 train_y = train_data["Survived"]
@@ -432,9 +426,6 @@ So i won't search the best parameters manually, but it's brude force algorithm a
 *1)LogisticRegression*
 """
 
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import GridSearchCV
-import numpy as np
 model = LogisticRegression(random_state=10, max_iter=1000)
 logit_params = {
     "C": [1, 3, 10, 20, 30, 40],
@@ -449,7 +440,6 @@ print(logit_gs.best_score_)
 
 """*2)RandomForest*"""
 
-from sklearn.ensemble import RandomForestClassifier
 rf_model = RandomForestClassifier()
 
 rf_params = {
@@ -470,7 +460,6 @@ print(rf_gs.best_score_)
 
 """*3)Support Vector Machine*"""
 
-from sklearn.svm import SVC
 svc_model = SVC()
 
 test_parameters = {
@@ -486,7 +475,6 @@ print(svc_gs.best_score_)
 
 """*4)Light Gradient Boosting*"""
 
-from lightgbm import LGBMClassifier
 lgb_model = LGBMClassifier()
 test_parameters = {
     "n_estimators": [int(x) for x in np.linspace(5, 30, 6)],
@@ -504,7 +492,6 @@ print(lgb_gs.best_score_)
 
 """*5)XGBoost*"""
 
-from xgboost import XGBClassifier
 xgb_model = XGBClassifier()
 
 parameters = {'nthread': [4],
@@ -529,8 +516,6 @@ print(xgb_gs.best_params_)
 print(xgb_gs.best_score_)
 
 """*6)CatBoost*"""
-
-from catboost import CatBoostClassifier
 
 catBoost = CatBoostClassifier()
 test_parameters = {'iterations': [500],
@@ -573,8 +558,6 @@ to apply all of the models during fit function working.
 
 The result on kaggle would be better if it worked properly.
 """
-
-from sklearn.ensemble import VotingClassifier
 
 ensemble_model = VotingClassifier(estimators=[
     ("logit", logit_gs.best_estimator_),
