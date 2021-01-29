@@ -76,13 +76,13 @@ def preprocess(data):
     for i in range(data.shape[0]):
         if np.isnan(data["Age"][i]):
             # data["Age"][i] = 1000
-            if "Ms" in data["Name"][i] or "Miss" in data["Name"][i] :
+            if "Ms" in data["Name"][i] or "Miss" in data["Name"][i]:
                 data["Age"][i] = 15
-            elif "Mr" in data["Name"][i] or "Mrs" in data["Name"][i] :
+            elif "Mr" in data["Name"][i] or "Mrs" in data["Name"][i]:
                 data["Age"][i] = 30
-            elif "Don." in data["Name"][i] :
+            elif "Don." in data["Name"][i]:
                 data["Age"][i] = 40
-            else :
+            else:
                 data["Age"][i] = 10
         # if data["Age"][i] < 0.5:
         #     data["Age"][i] = 0.5
@@ -92,9 +92,9 @@ def preprocess(data):
     data = splitColumn(data, "Embarked")
     data = splitColumn(data, "Sex")
     data = splitColumn(data, "Pclass")
-    data = splitFloatColumn(data, "Parch", [1,2,4])
-    data = splitFloatColumn(data, "SibSp", [1,2,4])
-    data = splitFloatColumn(data, "Age", [2,5,10,16,20,28,35,45])
+    data = splitFloatColumn(data, "Parch", [1, 2, 4])
+    data = splitFloatColumn(data, "SibSp", [1, 2, 4])
+    data = splitFloatColumn(data, "Age", [2, 5, 10, 16, 20, 28, 35, 45])
     data = splitFloatColumn(data, "Fare", [7, 9, 10, 15, 30, 60, 80])
 
     for feature in data:
