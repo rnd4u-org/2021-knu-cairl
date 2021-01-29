@@ -23,7 +23,6 @@ from google.colab import files
 from sklearn.svm import SVR
 from catboost import CatBoostRegressor
 from lightgbm import LGBMRegressor
-from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeRegressor
 from mlxtend.regressor import StackingRegressor
 from sklearn.linear_model import LinearRegression, BayesianRidge
