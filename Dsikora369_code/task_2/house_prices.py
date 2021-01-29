@@ -21,6 +21,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.neighbors import KNeighborsRegressor
 from catboost import CatBoostRegressor
+import skew
+from sklearn.metrics import mean_squared_error
 files.upload()  # here you will download kaggle.json
 
 """Setting permission before downloading dataset."""
@@ -65,7 +67,7 @@ train_test = pd.concat([train_2, test], axis=0, sort=False)
 
 nan = pd.DataFrame(train_test.isna().sum(), columns=['NaN_sum'])
 nan['feat'] = nan.index
-nan['Perc(%)'] = (nan['NaN_sum']/1460)*100
+nan['Perc(%)'] = (nan['NaN_sum'] / 1460)*100
 nan = nan[nan['NaN_sum'] > 0]
 nan = nan.sort_values(by=['NaN_sum'])
 nan['Usability'] = np.where(nan['Perc(%)'] > 20, 'Discard', 'Keep')
@@ -153,13 +155,12 @@ train_test["SqFtPerRoom"] = (train_test["GrLivArea"] /
                               train_test["FullBath"] + train_test["HalfBath"] +
                               train_test["KitchenAbvGr"]))
 
-train_test['Total_Home_Quality'] = (train_test['OverallQual'] +
-                                    train_test['OverallCond'])
+train_test['Total_Home_Quality'] = (train_test[
+    'OverallQual'] + train_test['OverallCond'])
 
-train_test['Total_Bathrooms'] = (train_test['FullBath'] +
-                                 (0.5 * train_test['HalfBath']) +
-                                 train_test['BsmtFullBath'] +
-                                 (0.5 * train_test['BsmtHalfBath']))
+train_test['Total_Bathrooms'] = (train_test[
+    'FullBath'] + (0.5 * train_test['HalfBath']) + train_test[
+        'BsmtFullBath'] + (0.5 * train_test['BsmtHalfBath']))
 
 train_test["HighQualSF"] = train_test["1stFlrSF"] + train_test["2ndFlrSF"]
 
@@ -176,8 +177,8 @@ train_test_dummy = pd.get_dummies(train_test)
 # Fetch all numeric features
 
 # train_test['Id'] = train_test['Id'].apply(str)
-numeric_features = train_test_dummy.dtypes[train_test_dummy.dtypes !=
-                                           object].index
+numeric_features = train_test_dummy.dtypes[
+    train_test_dummy.dtypes != object].index
 skewed_features = train_test_dummy[numeric_features].apply(
     lambda x: skew(x)).sort_values(ascending=False)
 high_skew = skewed_features[skewed_features > 0.5]
@@ -225,7 +226,7 @@ feat_imp
 # Preforming a Random Grid Search to find the best combination of parameters
 
 grid = {'iterations': [1000, 3000, 6000],
-        'learning_rate': [0.0005 + 0.0005*i for i in range(0, 50)],
+        'learning_rate': [0.0005 + 0.0005 * i for i in range(0, 50)],
         'depth': [4, 6, 10],
         'l2_leaf_reg': [1, 3, 5, 9]}
 
