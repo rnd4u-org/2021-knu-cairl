@@ -1,16 +1,17 @@
 import tensorflow as tf
-import numpy as np
+
 
 def chooseBestModel(x_train, y_train, x_test, y_test):
     activations = ['relu', 'sigmoid', 'softmax']
     f = open("rez.txt", "a")
 
-    for i in range(10,150):
+    for i in range(10, 150):
         for ai in activations:
-            for j in range(10,150):
+            for j in range(10, 150):
                 for aj in activations:
-                    f.write(str([[i, ai],[j, aj]]) + " " +str(testLData(x_train, y_train, x_test, y_test, [[i, ai],[j, aj]])) + "\n")
+                    f.write(str([[i, ai], [j, aj]]) + " " + str(testLData(x_train, y_train, x_test, y_test, [[i, ai], [j, aj]])) + "\n")
     f.close()
+
 
 def ann_predict(model, x, possible_y):
     y = model.predict(x)
@@ -24,6 +25,7 @@ def testLData(x_train, y_train, x_test, y_test, lData):
         s += annModel(x_train, y_train, x_test, y_test, lData)[1]
     return s / 10
 
+
 def annModel(x_train, y_train, x_test, y_test, lData):
     layers = [tf.keras.layers.Flatten(input_shape=(33,))]
     for i in lData:
@@ -33,10 +35,10 @@ def annModel(x_train, y_train, x_test, y_test, lData):
     model = tf.keras.Sequential(layers)
     y_train = y_train.astype(float)
     model.compile(
-              optimizer='adam',
-              loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
-              metrics=['accuracy']
-              )
+        optimizer='adam',
+        loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
+        metrics=['accuracy']
+    )
     model.fit(x_train, y_train, epochs=100)
     test_loss, test_acc = model.evaluate(x_test, y_test)
     print("accuracy:", test_acc)
