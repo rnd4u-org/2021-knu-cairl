@@ -4,11 +4,7 @@ import numpy as np
 def chooseBestModel(x_train, y_train, x_test, y_test) :
     activations = ['relu', 'sigmoid', 'softmax']
     f = open("rez.txt", "a")
-    for i in range(10, 150):
-        for ai in activations:
-            pass
-            #f.write(str([[i, ai]]) + " " +str(testLData(x_train, y_train, x_test, y_test, [[i, ai]])) + "\n")
-
+    
     for i in range(10,150) :
         for ai in activations:
             for j in range(10,150) :

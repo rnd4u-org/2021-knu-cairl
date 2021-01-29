@@ -1,10 +1,3 @@
-from npFunctions import *
-
-def check_model(x_train, y_train, x_test, y_test, model):
-    print("traindata:", model.score(x_train, y_train))
-    print("testdata:" , model.score(x_test, y_test))
-    print()
-
 def sklearn_models(x_train, y_train, x_test, y_test):
     from sklearn.tree import DecisionTreeClassifier
     tree = DecisionTreeClassifier(criterion="entropy")
@@ -33,21 +26,6 @@ def sklearn_models(x_train, y_train, x_test, y_test):
     svcRBF = SVC(kernel="rbf")
     svcRBF.fit(x_train,y_train)
 
-    # print("tree")
-    # check_model(x_train, y_train, x_test, y_test, tree)
-    # print("logReg")
-    # check_model(x_train, y_train, x_test, y_test, logReg)
-    # print("neighbors")
-    # check_model(x_train, y_train, x_test, y_test, neighbors)
-    # print("forest")
-    # check_model(x_train, y_train, x_test, y_test, forest)
-    # print("gauss")
-    # check_model(x_train, y_train, x_test, y_test, gauss)
-    # print("svc_linear")
-    # check_model(x_train, y_train, x_test, y_test, svc)
-    # print("svc_rbf")
-    # check_model(x_train, y_train, x_test, y_test, svcRBF)
-    
     return [tree, forest, logReg, gauss, svc]
 
 def models_predict(models, x):

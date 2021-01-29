@@ -1,6 +1,5 @@
-from sklearn_models import *
-from npFunctions import *
-from ann_model import *
+from sklearn_models import sklearn_models, models_predict, boosted_test
+from ann_model import annModel, ann_predict, chooseBestModel
 
 import numpy as np
 import pandas as pd
@@ -122,14 +121,14 @@ for i in range(1):
     ann, acc = annModel(x_train, y_train, x_test, y_test, [[50, 'relu']])
 
     #chooseBestModel(x_train, y_train, x_test, y_test)
-    # models = sklearn_models(x_train, y_train, x_test, y_test)
+    models = sklearn_models(x_train, y_train, x_test, y_test)
 
-    # rez = boosted_test(models, x_test, y_test)
-    # a.append(rez)
+    rez = boosted_test(models, x_test, y_test)
+    a.append(rez)
     
-    # print()
-    # print(a)
-    # print("mean:", sum(a)/len(a))
+    print()
+    print(a)
+    print("mean:", sum(a)/len(a))
 
 def generateAns():
     test_ids = pd.read_csv("test.csv")["PassengerId"]
