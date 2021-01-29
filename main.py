@@ -1,12 +1,10 @@
-from sklearn_models import sklearn_models, models_predict, boosted_test
-from ann_model import annModel, ann_predict, chooseBestModel
+from sklearn_models import sklearn_models, boosted_test
+from ann_model import annModel, ann_predict
 
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-import datetime
-import sklearn
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -31,47 +29,50 @@ def splitColumn(data, feature):
             if data[feature][i] == val:
                 a.append(1)
             else: a.append(0)
-        data[feature+"_"+str(val)] = a
-    return data.drop([feature], axis = 1)
+        data[feature + "_" + str(val)] = a
+    return data.drop([feature], axis=1)
+
 
 def splitFloatColumn(data, feature, diapasones):
-    for i in range(len(diapasones)+1):
+    for i in range(len(diapasones) + 1):
         a = []
         for j in range(data.shape[0]):
             t = True
             if i > 0:
-                t &= (data[feature][j] >= diapasones[i-1])
+                t &= (data[feature][j] >= diapasones[i - 1])
             if i < len(diapasones):
                 t &= (data[feature][j] < diapasones[i])
             if t:
                 a.append(1)
             else: a.append(0)
-        data[feature+"_"+str(i)] = a
-    return data.drop([feature], axis = 1)
+        data[feature + "_" + str(i)] = a
+    return data.drop([feature], axis=1)
+
 
 def showSurvival(data):
     features = ['Fare']
     rows = 1
     cols = 1
 
-    fig, axs = plt.subplots(rows, cols, figsize = (cols*3.2, rows*3.2))
+    fig, axs = plt.subplots(rows, cols, figsize=(cols * 3.2, rows * 3.2))
 
     for r in range(rows):
         for c in range(cols):
             i = r * cols + c
-            sns.countplot(data[features[i]], hue = data["Survived"], ax=axs)
+            sns.countplot(data[features[i]], hue=data["Survived"], ax=axs)
             axs.legend(title="Survived", loc='upper right')
 
     plt.tight_layout()
     plt.show()
+
 
 def printVals(data):
     for val in data:
         print(data[val].value_counts())
         print()
 
+
 def preprocess(data):
-    #data = data.dropna(subset = ['Age'])
     for i in range(data.shape[0]):
         if np.isnan(data["Age"][i]):
             # data["Age"][i] = 1000
@@ -83,10 +84,8 @@ def preprocess(data):
                 data["Age"][i] = 40
             else:
                 data["Age"][i] = 10
-        # if data["Age"][i] < 0.5:
-        #     data["Age"][i] = 0.5
-            
-    data = data.drop(['PassengerId', 'Ticket', 'Name', 'Cabin'], axis = 1)
+
+    data = data.drop(['PassengerId', 'Ticket', 'Name', 'Cabin'], axis=1)
     print(data)
     data = splitColumn(data, "Embarked")
     data = splitColumn(data, "Sex")
@@ -105,29 +104,32 @@ def preprocess(data):
     print(data)
     return data
 
+
 def split_data(data):
     return (data.iloc[:, 1:].values, data.iloc[:, 0].values) 
+
 
 data = preprocess(data)
 x, y = split_data(data)
 
 a = []
 for i in range(1):
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)#datetime.datetime.now().microsecond)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
     x_train = x
     y_train = y
-    #exit()
+    # exit()
     ann, acc = annModel(x_train, y_train, x_test, y_test, [[50, 'relu']])
 
-    #chooseBestModel(x_train, y_train, x_test, y_test)
+    # chooseBestModel(x_train, y_train, x_test, y_test)
     models = sklearn_models(x_train, y_train, x_test, y_test)
 
     rez = boosted_test(models, x_test, y_test)
     a.append(rez)
-    
+
     print()
     print(a)
-    print("mean:", sum(a)/len(a))
+    print("mean:", sum(a) / len(a))
+
 
 def generateAns():
     test_ids = pd.read_csv("test.csv")["PassengerId"]
@@ -136,14 +138,15 @@ def generateAns():
     test = preprocess(test)
     x, y = split_data(test)
 
-    #Y_pred = models_predict(models, x)
+    # Y_pred = models_predict(models, x)
     y = ann_predict(ann, x, [])
 
     submission = pd.DataFrame({
-            "PassengerId": test_ids,
-            "Survived": y
-        })
+        "PassengerId": test_ids,
+        "Survived": y
+    })
     submission.to_csv('./titanic.csv', index=False)
     print('Exported!')
+
 
 generateAns()
