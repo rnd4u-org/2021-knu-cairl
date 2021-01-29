@@ -15,45 +15,16 @@ Downloading Kaggle token.
 
 import pandas as pd
 import numpy as np
-import re
 from google.colab import files
-from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
-import tensorflow as tf
-import math
 import matplotlib.pyplot as plt
 import seaborn as sns
-from tensorflow.keras.layers import Dense, Dropout
 from sklearn.neighbors import KNeighborsRegressor
-from scipy.stats import skew, norm
-import xgboost as xgb
-from catboost import Pool
-from sklearn.svm import SVR
 from catboost import CatBoostRegressor
-from lightgbm import LGBMRegressor
-from sklearn.naive_bayes import GaussianNB
-from sklearn.tree import DecisionTreeRegressor
-from mlxtend.regressor import StackingRegressor
-from sklearn.linear_model import LinearRegression, BayesianRidge
-from sklearn.model_selection import RepeatedKFold
-from sklearn.model_selection import KFold, cross_val_score
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
-from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
-from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_squared_log_error
 files.upload()  # here you will download kaggle.json
 
 """Setting permission before downloading dataset."""
 
-!pip install -q kaggle
-!mkdir -p ~/.kaggle
-!cp kaggle.json ~/.kaggle/
-!ls ~/.kaggle
-!chmod 600 /root/.kaggle/kaggle.json  # set permission
-
-"""Downloading dataset."""
-
-!kaggle competitions download -c house-prices-advanced-regression-techniques
 
 """**EDA**
 
