@@ -5,19 +5,21 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-
-import warnings
-warnings.filterwarnings('ignore')
-
 from sklearn.preprocessing import LabelEncoder
-enc = LabelEncoder()
-
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+
+import warnings
+
+warnings.filterwarnings('ignore')
+
+enc = LabelEncoder()
+
 sc = StandardScaler()
 
 data = pd.read_csv("train.csv")
 print(data.shape)
+
 
 def splitColumn(data, feature):
     vals = set(data[feature])
@@ -28,7 +30,8 @@ def splitColumn(data, feature):
         for i in range(data.shape[0]):
             if data[feature][i] == val:
                 a.append(1)
-            else: a.append(0)
+            else:
+                a.append(0)
         data[feature + "_" + str(val)] = a
     return data.drop([feature], axis=1)
 
@@ -44,7 +47,8 @@ def splitFloatColumn(data, feature, diapasones):
                 t &= (data[feature][j] < diapasones[i])
             if t:
                 a.append(1)
-            else: a.append(0)
+            else:
+                a.append(0)
         data[feature + "_" + str(i)] = a
     return data.drop([feature], axis=1)
 
