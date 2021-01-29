@@ -32,7 +32,7 @@ def models_predict(models, x):
     rez = sum(model.predict(x) for model in models)/len(models)
     for i in range(len(rez)):
         if rez[i] < 0.5: rez[i] = 0
-        else : rez[i] = 1
+        else: rez[i] = 1
     return rez.astype(int)
 
 def boosted_test(models, x_test, y_test):
@@ -43,7 +43,7 @@ def boosted_test(models, x_test, y_test):
     
     for i in range(len(y_test)):
         k+=1
-        if rez[i] == y_test[i] :
+        if rez[i] == y_test[i]:
             t+=1
     print(k, t, t/k)
     return t/k

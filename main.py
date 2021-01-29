@@ -48,7 +48,6 @@ def splitFloatColumn(data, feature, diapasones):
             else: a.append(0)
         data[feature+"_"+str(i)] = a
     return data.drop([feature], axis = 1)
-        
 
 def showSurvival(data):
     features = ['Fare']
