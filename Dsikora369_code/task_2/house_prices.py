@@ -67,7 +67,7 @@ train_test = pd.concat([train_2, test], axis=0, sort=False)
 
 nan = pd.DataFrame(train_test.isna().sum(), columns=['NaN_sum'])
 nan['feat'] = nan.index
-nan['Perc(%)'] = (nan['NaN_sum'] / 1460)*100
+nan['Perc(%)'] = (nan['NaN_sum'] / 1460) * 100
 nan = nan[nan['NaN_sum'] > 0]
 nan = nan.sort_values(by=['NaN_sum'])
 nan['Usability'] = np.where(nan['Perc(%)'] > 20, 'Discard', 'Keep')
@@ -150,10 +150,9 @@ for col in train_test:
         print(train_test[col][0])
 
 
-train_test["SqFtPerRoom"] = (train_test["GrLivArea"] /
-                             (train_test["TotRmsAbvGrd"] +
-                              train_test["FullBath"] + train_test["HalfBath"] +
-                              train_test["KitchenAbvGr"]))
+train_test["SqFtPerRoom"] = (train_test["GrLivArea"] / (train_test[
+    "TotRmsAbvGrd"] + train_test["FullBath"] + train_test[
+        "HalfBath"] + train_test["KitchenAbvGr"]))
 
 train_test['Total_Home_Quality'] = (train_test[
     'OverallQual'] + train_test['OverallCond'])
