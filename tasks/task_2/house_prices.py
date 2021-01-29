@@ -49,11 +49,6 @@ print(test_data.isna().sum())
 
 """**Let's explore our target variable and how the other features influence it.**"""
 
-pip install flake8 pycodestyle_magic
-
-# Commented out IPython magic to ensure Python compatibility.
-# %load_ext pycodestyle_magic
-
 (mu, sigma) = norm.fit(train_data['SalePrice'])
 
 plt.figure(figsize=(12, 6))
