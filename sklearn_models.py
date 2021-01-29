@@ -21,7 +21,7 @@ def sklearn_models(x_train, y_train, x_test, y_test):
 
     from sklearn.svm import SVC
     svc = SVC(kernel="linear")
-    svc.fit(x_train,y_train)
+    svc.fit(x_train, y_train)
 
     svcRBF = SVC(kernel="rbf")
     svcRBF.fit(x_train, y_train)
