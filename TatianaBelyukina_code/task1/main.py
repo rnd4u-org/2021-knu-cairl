@@ -11,8 +11,6 @@ titanic.head(10)
 print(titanic.shape)
 print(titanic.describe())
 print(titanic['Survived'].value_counts())
-sns.countplot(titanic['Survived'])
-plt.show()
 print(titanic.groupby('Sex')[['Survived']].mean())
 print(titanic.pivot_table('Survived', index='Sex', columns='Pclass'))
 titanic.pivot_table('Survived', index='Sex', columns='Pclass').plot()
@@ -168,5 +166,6 @@ def generateAns(model):
         })
     submission.to_csv('./titanic.csv', index=False)
     print('Exported!')
+
 
 generateAns(model)
