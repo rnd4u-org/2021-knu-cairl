@@ -7,7 +7,7 @@ def splitColumn(data, feature):
                 a.append(1)
             else:
                 a.append(0)
-        data[feature+ "_" +str(val)] = a
+        data[feature + "_" + str(val)] = a
     return data.drop([feature], axis=1)
 
 
