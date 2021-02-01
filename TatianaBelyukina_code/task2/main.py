@@ -41,12 +41,13 @@ def train(x_train, y_train, x_test, y_test):
     from sklearn.ensemble import RandomForestRegressor 
     classifier = RandomForestRegressor()
     classifier.fit(x_train, y_train)
-    
+
     import pickle 
     filename = 'final_model.pkl'
     pickle.dump(classifier, open(filename, 'wb'))
 
     return classifier
+
 
 model = train(x_train, y_train, x_test, y_test)
 
