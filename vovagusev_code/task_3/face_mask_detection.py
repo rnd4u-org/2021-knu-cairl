@@ -31,21 +31,21 @@ from tensorflow.keras.applications import InceptionResNetV2
 
 """**Loading the data**"""
 
-!pip install kaggle
+# !pip install kaggle
 
 files.upload()
 
-! mkdir ~/.kaggle
- ! cp kaggle.json ~/.kaggle/
-! chmod 600 ~/.kaggle/kaggle.json
+# ! mkdir ~/.kaggle
+# ! cp kaggle.json ~/.kaggle/
+# ! chmod 600 ~/.kaggle/kaggle.json
 
-!kaggle datasets download -d omkargurav/face-mask-dataset
+# !kaggle datasets download -d omkargurav/face-mask-dataset
 
 file_name = 'face-mask-dataset.zip'
 
 with ZipFile(file_name, 'r') as zip:
-  zip.extractall()
-  print("Done")
+    zip.extractall()
+    print("Done")
 
 batch_size = 40
 img_height = 200
@@ -73,17 +73,17 @@ class_names = train_data.class_names
 
 plt.figure(figsize=(10, 10))
 for images, labels in train_data.take(1):
-  for i in range(12):
-    ax = plt.subplot(3, 4, i + 1)
-    plt.imshow(images[i].numpy().astype("uint8"))
-    plt.title(class_names[labels[i]])
-    plt.grid(True)
+    for i in range(12):
+        ax = plt.subplot(3, 4, i + 1)
+        plt.imshow(images[i].numpy().astype("uint8"))
+        plt.title(class_names[labels[i]])
+        plt.grid(True)
 
 """**Configuring datasets for performance**"""
 
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 train_data = train_data.cache().prefetch(buffer_size=AUTOTUNE)
-test_data= test_data.cache().prefetch(buffer_size=AUTOTUNE)
+test_data = test_data.cache().prefetch(buffer_size=AUTOTUNE)
 
 """**Modeling**
 
@@ -91,22 +91,22 @@ Using flatten layer will increase the size of the model,
 
 hence use Global avg Pooling instead.
 
-Is it necessary to include input_shape in the first layer?
+Is it necessary to include input_shape in the first layer? (input_shape=(200,200,3))
 
 Does it affect the performance?
 """
 
 model = tf.keras.models.Sequential([
-  layers.experimental.preprocessing.Rescaling(1./255),
-  layers.Conv2D(32, 3, activation='relu'),#,input_shape=(200,200,3)),
-  layers.MaxPooling2D(),
-  layers.Conv2D(64, 3, activation='relu'),
-  layers.MaxPooling2D(),
-  layers.Conv2D(128, 3, activation='relu'),
-  layers.MaxPooling2D(),
-  layers.GlobalAveragePooling2D(),
-  layers.Dense(256, activation='relu'),
-  layers.Dense(2, activation= 'softmax')
+    layers.experimental.preprocessing.Rescaling(1. / 255),
+    layers.Conv2D(32, 3, activation='relu'),
+    layers.MaxPooling2D(),
+    layers.Conv2D(64, 3, activation='relu'),
+    layers.MaxPooling2D(),
+    layers.Conv2D(128, 3, activation='relu'),
+    layers.MaxPooling2D(),
+    layers.GlobalAveragePooling2D(),
+    layers.Dense(256, activation='relu'),
+    layers.Dense(2, activation='softmax')
 ])
 
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
@@ -117,8 +117,8 @@ retVal = model.fit(train_data, validation_data=test_data, epochs=15)
 
 """**Let's visualize the result of training.**"""
 
-plt.plot(retVal.history['loss'], label = 'training loss')
-plt.plot(retVal.history['accuracy'], label = 'training accuracy')
+plt.plot(retVal.history['loss'], label='training loss')
+plt.plot(retVal.history['accuracy'], label='training accuracy')
 plt.legend()
 
 """Is it bad when the learning curve looks almost like a line?
@@ -130,21 +130,21 @@ plt.figure(figsize=(20, 20))
 for images, labels in test_data.take(1):
     predictions = model.predict(images)
     predlabel = []
-    
+
     for mem in predictions:
         predlabel.append(class_names[np.argmax(mem)])
-    
+
     for i in range(40):
         ax = plt.subplot(10, 4, i + 1)
         plt.imshow(images[i].numpy().astype("uint8"))
-        plt.title('Predicted label:'+ predlabel[i])
+        plt.title('Predicted label:' + predlabel[i])
         plt.axis('off')
         plt.grid(True)
 
 """Checking for scores."""
 
 scores = model.evaluate(test_data, verbose=0)
-print(scores[1]*100)
+print(scores[1] * 100)
 
 """**Experimenting with different structures of model**
 
@@ -152,19 +152,19 @@ In this one flatten was used.
 """
 
 model_1 = tf.keras.models.Sequential([
-  layers.experimental.preprocessing.Rescaling(1./255),
-  layers.Conv2D(32, 3, padding='same', activation='relu'),
-  layers.Conv2D(32, 3, activation='relu'),
-  layers.MaxPooling2D(),
-  layers.Dropout(0.25),
-  layers.Conv2D(64, 3, padding='same', activation='relu'),
-  layers.Conv2D(64, 3, activation='relu'),
-  layers.MaxPooling2D(),
-  layers.Dropout(0.25),     
-  layers.Flatten(),
-  layers.Dense(512, activation='relu'),
-  layers.Dropout(0.5),
-  layers.Dense(2, activation='softmax')                                
+    layers.experimental.preprocessing.Rescaling(1. / 255),
+    layers.Conv2D(32, 3, padding='same', activation='relu'),
+    layers.Conv2D(32, 3, activation='relu'),
+    layers.MaxPooling2D(),
+    layers.Dropout(0.25),
+    layers.Conv2D(64, 3, padding='same', activation='relu'),
+    layers.Conv2D(64, 3, activation='relu'),
+    layers.MaxPooling2D(),
+    layers.Dropout(0.25),     
+    layers.Flatten(),
+    layers.Dense(512, activation='relu'),
+    layers.Dropout(0.5),
+    layers.Dense(2, activation='softmax')                                
 ])
 
 model_1.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
@@ -180,8 +180,8 @@ Am i correct?
 Visualizing the trainging process
 """
 
-plt.plot(retVal_1.history['loss'], label = 'training loss')
-plt.plot(retVal_1.history['accuracy'], label = 'training accuracy')
+plt.plot(retVal_1.history['loss'], label='training loss')
+plt.plot(retVal_1.history['accuracy'], label='training accuracy')
 plt.legend()
 
 """I think this curves look better than previous ones, aren't them?
@@ -193,65 +193,65 @@ plt.figure(figsize=(20, 20))
 for images, labels in test_data.take(1):
     predictions = model_1.predict(images)
     predlabel = []
-    
+
     for mem in predictions:
         predlabel.append(class_names[np.argmax(mem)])
-    
+
     for i in range(40):
         ax = plt.subplot(10, 4, i + 1)
         plt.imshow(images[i].numpy().astype("uint8"))
-        plt.title('Predicted label:'+ predlabel[i])
+        plt.title('Predicted label:' + predlabel[i])
         plt.axis('off')
         plt.grid(True)
 
 scores = model_1.evaluate(test_data, verbose=0)
-print(scores[1]*100)
+print(scores[1] * 100)
 
 """The last custom model with 3 layers of convolutions and subsamplings"""
 
 model_2 = tf.keras.models.Sequential([
-  layers.experimental.preprocessing.Rescaling(1./255),
+    layers.experimental.preprocessing.Rescaling(1. / 255),
 
-  layers.Conv2D(32, 3, activation='relu'),
-  layers.MaxPooling2D(),
+    layers.Conv2D(32, 3, activation='relu'),
+    layers.MaxPooling2D(),
 
-  layers.Conv2D(32, 3, activation='relu'),
-  layers.MaxPooling2D(),
+    layers.Conv2D(32, 3, activation='relu'),
+    layers.MaxPooling2D(),
 
-  layers.Conv2D(64, 3, activation='relu'),
-  layers.MaxPooling2D(),
-  
-  layers.Flatten(),
-  layers.Dense(64, activation='relu'),
-  layers.Dropout(0.5),
-  layers.Dense(1, activation='sigmoid')                                
+    layers.Conv2D(64, 3, activation='relu'),
+    layers.MaxPooling2D(),
+
+    layers.Flatten(),
+    layers.Dense(64, activation='relu'),
+    layers.Dropout(0.5),
+    layers.Dense(1, activation='sigmoid')                                
 ])
 
 model_2.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 retVal_2 = model_2.fit(train_data, validation_data=test_data, epochs=15)
 
-plt.plot(retVal_2.history['loss'], label = 'training loss')
-plt.plot(retVal_2.history['accuracy'], label = 'training accuracy')
+plt.plot(retVal_2.history['loss'], label='training loss')
+plt.plot(retVal_2.history['accuracy'], label='training accuracy')
 plt.legend()
 
 plt.figure(figsize=(20, 20))
 for images, labels in test_data.take(1):
     predictions = model_2.predict(images)
     predlabel = []
-    
+
     for mem in predictions:
         predlabel.append(class_names[np.argmax(mem)])
-    
+
     for i in range(40):
         ax = plt.subplot(10, 4, i + 1)
         plt.imshow(images[i].numpy().astype("uint8"))
-        plt.title('Predicted label:'+ predlabel[i])
+        plt.title('Predicted label:' + predlabel[i])
         plt.axis('off')
         plt.grid(True)
 
 scores = model_2.evaluate(test_data, verbose=0)
-print(scores[1]*100)
+print(scores[1] * 100)
 
 """**Transfer learning**
 
@@ -279,12 +279,11 @@ VGG16_model.summary()
 """Let's create model based on vgg16"""
 
 model_3 = tf.keras.models.Sequential([
-  #layers.experimental.preprocessing.Rescaling(1./255),
-  VGG16_model,
-  layers.Flatten(),
-  layers.Dense(256, activation='relu'),
-  layers.Dropout(0.5),
-  layers.Dense(1, activation='sigmoid')                                
+    VGG16_model,
+    layers.Flatten(),
+    layers.Dense(256, activation='relu'),
+    layers.Dropout(0.5),
+    layers.Dense(1, activation='sigmoid')                                
 ])
 
 model_3.summary()
@@ -301,27 +300,27 @@ model_3.compile(optimizer=Adam(lr=1e-5), loss='binary_crossentropy', metrics=['a
 
 retVal_3 = model_3.fit(train_data, validation_data=test_data, epochs=5)
 
-plt.plot(retVal_3.history['loss'], label = 'training loss')
-plt.plot(retVal_3.history['accuracy'], label = 'training accuracy')
+plt.plot(retVal_3.history['loss'], label='training loss')
+plt.plot(retVal_3.history['accuracy'], label='training accuracy')
 plt.legend()
 
 plt.figure(figsize=(20, 20))
 for images, labels in test_data.take(1):
     predictions = model_3.predict(images)
     predlabel = []
-    
+
     for mem in predictions:
         predlabel.append(class_names[np.argmax(mem)])
-    
+
     for i in range(40):
         ax = plt.subplot(10, 4, i + 1)
         plt.imshow(images[i].numpy().astype("uint8"))
-        plt.title('Predicted label:'+ predlabel[i])
+        plt.title('Predicted label:' + predlabel[i])
         plt.axis('off')
         plt.grid(True)
 
 scores = model_3.evaluate(test_data, verbose=0)
-print(scores[1]*100)
+print(scores[1] * 100)
 
 """**VGG19**"""
 
@@ -338,11 +337,11 @@ VGG19_model.summary()
 """Let's create model based on vgg19"""
 
 model_4 = tf.keras.models.Sequential([
-  VGG19_model,
-  layers.Flatten(),
-  layers.Dense(256, activation='relu'),
-  layers.Dropout(0.5),
-  layers.Dense(1, activation='sigmoid')                                
+    VGG19_model,
+    layers.Flatten(),
+    layers.Dense(256, activation='relu'),
+    layers.Dropout(0.5),
+    layers.Dense(1, activation='sigmoid')                                
 ])
 
 model_4.summary()
@@ -359,27 +358,27 @@ model_4.compile(optimizer=Adam(lr=1e-5), loss='binary_crossentropy', metrics=['a
 
 retVal_4 = model_4.fit(train_data, validation_data=test_data, epochs=5)
 
-plt.plot(retVal_4.history['loss'], label = 'training loss')
-plt.plot(retVal_4.history['accuracy'], label = 'training accuracy')
+plt.plot(retVal_4.history['loss'], label='training loss')
+plt.plot(retVal_4.history['accuracy'], label='training accuracy')
 plt.legend()
 
 plt.figure(figsize=(20, 20))
 for images, labels in test_data.take(1):
     predictions = model_4.predict(images)
     predlabel = []
-    
+
     for mem in predictions:
         predlabel.append(class_names[np.argmax(mem)])
-    
+
     for i in range(40):
         ax = plt.subplot(10, 4, i + 1)
         plt.imshow(images[i].numpy().astype("uint8"))
-        plt.title('Predicted label:'+ predlabel[i])
+        plt.title('Predicted label:' + predlabel[i])
         plt.axis('off')
         plt.grid(True)
 
 scores = model_4.evaluate(test_data, verbose=0)
-print(scores[1]*100)
+print(scores[1] * 100)
 
 """**InceptionV3**"""
 
@@ -396,11 +395,11 @@ incV3_model.summary()
 """Let's create model based on InceptionV3"""
 
 model_5 = tf.keras.models.Sequential([
-  incV3_model,
-  layers.Flatten(),
-  layers.Dense(256, activation='relu'),
-  layers.Dropout(0.5),
-  layers.Dense(1, activation='sigmoid')                                
+    incV3_model,
+    layers.Flatten(),
+    layers.Dense(256, activation='relu'),
+    layers.Dropout(0.5),
+    layers.Dense(1, activation='sigmoid')                                
 ])
 
 model_5.summary()
@@ -417,22 +416,22 @@ model_5.compile(optimizer=Adam(lr=1e-5), loss='binary_crossentropy', metrics=['a
 
 retVal_5 = model_5.fit(train_data, validation_data=test_data, epochs=5)
 
-plt.plot(retVal_5.history['loss'], label = 'training loss')
-plt.plot(retVal_5.history['accuracy'], label = 'training accuracy')
+plt.plot(retVal_5.history['loss'], label='training loss')
+plt.plot(retVal_5.history['accuracy'], label='training accuracy')
 plt.legend()
 
 plt.figure(figsize=(20, 20))
 for images, labels in test_data.take(1):
     predictions = model_5.predict(images)
     predlabel = []
-    
+
     for mem in predictions:
         predlabel.append(class_names[np.argmax(mem)])
-    
+
     for i in range(40):
         ax = plt.subplot(10, 4, i + 1)
         plt.imshow(images[i].numpy().astype("uint8"))
-        plt.title('Predicted label:'+ predlabel[i])
+        plt.title('Predicted label:' + predlabel[i])
         plt.axis('off')
         plt.grid(True)
 
@@ -454,11 +453,11 @@ ResNet50_model.summary()
 """Let's create model based on ResNet50"""
 
 model_6 = tf.keras.models.Sequential([
-  ResNet50_model,
-  layers.Flatten(),
-  layers.Dense(256, activation='relu'),
-  layers.Dropout(0.5),
-  layers.Dense(1, activation='sigmoid')                                
+    ResNet50_model,
+    layers.Flatten(),
+    layers.Dense(256, activation='relu'),
+    layers.Dropout(0.5),
+    layers.Dense(1, activation='sigmoid')                                
 ])
 
 model_6.summary()
@@ -475,27 +474,27 @@ model_6.compile(optimizer=Adam(lr=1e-5), loss='binary_crossentropy', metrics=['a
 
 retVal_6 = model_6.fit(train_data, validation_data=test_data, epochs=5)
 
-plt.plot(retVal_6.history['loss'], label = 'training loss')
-plt.plot(retVal_6.history['accuracy'], label = 'training accuracy')
+plt.plot(retVal_6.history['loss'], label='training loss')
+plt.plot(retVal_6.history['accuracy'], label='training accuracy')
 plt.legend()
 
 plt.figure(figsize=(20, 20))
 for images, labels in test_data.take(1):
     predictions = model_6.predict(images)
     predlabel = []
-    
+
     for mem in predictions:
         predlabel.append(class_names[np.argmax(mem)])
-    
+
     for i in range(40):
         ax = plt.subplot(10, 4, i + 1)
         plt.imshow(images[i].numpy().astype("uint8"))
-        plt.title('Predicted label:'+ predlabel[i])
+        plt.title('Predicted label:' + predlabel[i])
         plt.axis('off')
         plt.grid(True)
 
 scores = model_6.evaluate(test_data, verbose=0)
-print(scores[1]*100)
+print(scores[1] * 100)
 
 """**InceptionV4/InceptionResNet**"""
 
@@ -506,11 +505,11 @@ InceptionV4_model.trainable = False
 InceptionV4_model.summary()
 
 model_7 = tf.keras.models.Sequential([
-  InceptionV4_model,
-  layers.Flatten(),
-  layers.Dense(256, activation='relu'),
-  layers.Dropout(0.5),
-  layers.Dense(1, activation='sigmoid')                                
+    InceptionV4_model,
+    layers.Flatten(),
+    layers.Dense(256, activation='relu'),
+    layers.Dropout(0.5),
+    layers.Dense(1, activation='sigmoid')                                
 ])
 
 model_7.summary()
@@ -519,27 +518,27 @@ model_7.compile(optimizer=Adam(lr=1e-5), loss='binary_crossentropy', metrics=['a
 
 retVal_7 = model_7.fit(train_data, validation_data=test_data, epochs=5)
 
-plt.plot(retVal_7.history['loss'], label = 'training loss')
-plt.plot(retVal_7.history['accuracy'], label = 'training accuracy')
+plt.plot(retVal_7.history['loss'], label='training loss')
+plt.plot(retVal_7.history['accuracy'], label='training accuracy')
 plt.legend()
 
 plt.figure(figsize=(20, 20))
 for images, labels in test_data.take(1):
     predictions = model_7.predict(images)
     predlabel = []
-    
+
     for mem in predictions:
         predlabel.append(class_names[np.argmax(mem)])
-    
+
     for i in range(40):
         ax = plt.subplot(10, 4, i + 1)
         plt.imshow(images[i].numpy().astype("uint8"))
-        plt.title('Predicted label:'+ predlabel[i])
+        plt.title('Predicted label:' + predlabel[i])
         plt.axis('off')
         plt.grid(True)
 
 scores = model_7.evaluate(test_data, verbose=0)
-print(scores[1]*100)
+print(scores[1] * 100)
 
 """Saving **models**"""
 
