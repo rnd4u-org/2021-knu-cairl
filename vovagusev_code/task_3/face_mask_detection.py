@@ -13,10 +13,7 @@ Original file is located at
 **Importing libraries**
 """
 
-import os
-import cv2
-import numpy as np 
-import pandas as pd 
+import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow.keras import layers
@@ -26,7 +23,6 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.applications import VGG16
 from tensorflow.keras.applications import VGG19
 from tensorflow.keras.applications import InceptionV3
-from tensorflow.keras.applications import ResNet50
 from tensorflow.keras.applications import InceptionResNetV2
 
 """**Loading the data**"""
@@ -436,7 +432,7 @@ for images, labels in test_data.take(1):
         plt.grid(True)
 
 scores = model_5.evaluate(test_data, verbose=0)
-print(scores[1]*100)
+print(scores[1] * 100)
 
 """**ResNet50**"""
 
