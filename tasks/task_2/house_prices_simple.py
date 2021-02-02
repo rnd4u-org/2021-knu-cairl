@@ -32,7 +32,7 @@ dropped_columns = ['BsmtFinSF2', 'LowQualFinSF', 'BsmtHalfBath', '3SsnPorch', 'S
 train_test.drop(dropped_columns, axis=1)
 train_test['street'] = pd.get_dummies(train_test.Street, drop_first=True)
 train_test['condition'] = train_test.SaleCondition.apply(lambda x: 1 if x == 'Normal' else 0)
-train_data= all_data[:train_data.shape[0]].select_dtypes(include=[np.number]).interpolate().dropna()
+train_data = all_data[:train_data.shape[0]].select_dtypes(include=[np.number]).interpolate().dropna()
 test_data = all_data[train_data.shape[0]:].select_dtypes(include=[np.number]).interpolate().dropna()
 
 """**Modeling**"""
