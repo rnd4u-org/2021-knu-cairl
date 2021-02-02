@@ -237,9 +237,9 @@ randomized_search_result = final_model.randomized_search(grid, X=X_train,
 
 """Final model."""
 
-print("\n========================================================")
+print("="*40)
 print(" Results from Grid Search ")
-print("========================================================")
+print("="*40)
 print("\n The best params across ALL searched params:\n",
       randomized_search_result['params'])
 

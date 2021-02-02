@@ -68,7 +68,7 @@ train[['CategoricalFare', 'Survived']].groupby(
 
 def get_cabin(cabin):
     for i in str(cabin):
-        if i in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'Z']:
+        if i in 'ABCDEFGHZ':
             return i
 
 
@@ -118,12 +118,6 @@ train[['Title', 'Survived']].groupby(['Title'], as_index=False).mean()
 
 train['Embarked'] = train['Embarked'].fillna(train['Embarked'].mode()[0])
 
-"""Adding Ageclass feature.
-
-"""
-
-train['Age*Class'] = train.Age * train.Pclass
-train
 
 """Dropping useless columns."""
 
@@ -134,20 +128,6 @@ train = train.drop(drop_elements, axis=1)
 train
 
 """Creating function for data preprocessing and dividing into training and validation data."""
-
-
-def get_title(name):
-    pattern = r'([A-Za-z]+)\.'
-    title_search = re.search(pattern, name)
-    if title_search:
-        return title_search.group(1)
-    return ""
-
-
-def get_cabin(cabin):
-    for i in str(cabin):
-        if i in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'Z']:
-            return i
 
 
 def load_data(name):
@@ -224,9 +204,6 @@ def load_data(name):
     le.fit(dataset['Age'])
     dataset['Age'] = le.transform(dataset['Age'])
     # creating ageclass feature
-    dataset['Age*Class'] = dataset.Age * dataset.Pclass
-    le.fit(dataset['Age*Class'])
-    dataset['Age*Class'] = le.transform(dataset['Age*Class'])
 
     return dataset
 
@@ -234,7 +211,7 @@ def load_data(name):
 dataset = load_data("train.csv")
 train, val = train_test_split(dataset, test_size=0.1)
 features = ['Pclass', 'Sex', 'Age', 'Fare', 'Embarked', 'Alone', 'Title',
-            'BL', 'Age*Class']
+            'BL']
 training_dataset = (
     tf.data.Dataset.from_tensor_slices(
         (
@@ -254,11 +231,10 @@ validation_dataset = (
 
 """**Creating model**"""
 model = tf.keras.Sequential([
-    Dense(12, activation=tf.nn.leaky_relu, input_shape=[9]), Dropout(0.2), 
+    Dense(12, activation=tf.nn.leaky_relu, input_shape=[8]), Dropout(0.2), 
     Dense(5, activation=tf.nn.leaky_relu), Dense(2, activation=tf.nn.softmax)])
 opt = tf.keras.optimizers.Adam(
-    learning_rate=0.01, beta_1=0.9, beta_2=0.999, epsilon=1e-07, amsgrad=True,
-    name='Adam'
+    learning_rate=0.01, amsgrad=True
 )
 model.compile(optimizer=opt,
               loss=tf.keras.losses.SparseCategoricalCrossentropy(),
@@ -270,7 +246,7 @@ BATCH_SIZE = 256
 train_dataset = training_dataset.cache().repeat().shuffle(
     num_train_examples).batch(BATCH_SIZE)
 val_dataset = validation_dataset.cache().batch(BATCH_SIZE)
-model.fit(train_dataset, validation_data=val_dataset, epochs=1000,
+model.fit(train_dataset, validation_data=val_dataset, epochs=300,
           steps_per_epoch=math.ceil(num_train_examples / BATCH_SIZE))
 
 """Predicting and saving."""
