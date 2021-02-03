@@ -3,6 +3,7 @@ import os
 import cv2
 from random import shuffle
 
+
 def create_data():
     test_size = 0.2
     inputs = []
@@ -34,7 +35,7 @@ def create_data():
         x_test.append(image[0])
         y_test.append(image[1])
 
-    for image in data[int(test_size*len(data)):]:
+    for image in data[int(test_size * len(data)):]:
         x_train.append(image[0])
         y_train.append(image[1])
 
@@ -43,6 +44,6 @@ def create_data():
     np.save("outputs_test.npy", y_test)
     np.save("outputs_train.npy", y_train)
 
+
 def load_data():
-    return (np.load("inputs_train.npy"), np.load("outputs_train.npy"),
-        np.load("inputs_test.npy"), np.load("outputs_test.npy"))
+    return (np.load("inputs_train.npy"), np.load("outputs_train.npy"), np.load("inputs_test.npy"), np.load("outputs_test.npy"))
