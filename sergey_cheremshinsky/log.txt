@@ -1,0 +1,80 @@
+First train layers in last third
+
+Epoch 1/10
+604/604 [==============================] - ETA: 0s - loss: 0.6281 - accuracy: 0.7878WARNING:tensorflow:Your input ran out of data; interrupting training. Make sure that your dataset or generator can generate at least `steps_per_epoch * epochs` batches (in this case, 151 batches). You may need to use the repeat() function when building your dataset.
+604/604 [==============================] - 3167s 5s/step - loss: 0.6277 - accuracy: 0.7879 - val_loss: 6.8789 - val_accuracy: 0.5705
+Epoch 2/10
+604/604 [==============================] - 2954s 5s/step - loss: 0.1664 - accuracy: 0.9478
+WARNING:tensorflow:Early stopping conditioned on metric `val_loss` which is not available. Available metrics are: loss,accuracy
+WARNING:tensorflow:Learning rate reduction is conditioned on metric `val_accuracy` which is not available. Available metrics are: loss,accuracy,lr
+Epoch 3/10
+604/604 [==============================] - 2967s 5s/step - loss: 0.1627 - accuracy: 0.9639
+WARNING:tensorflow:Early stopping conditioned on metric `val_loss` which is not available. Available metrics are: loss,accuracy
+WARNING:tensorflow:Learning rate reduction is conditioned on metric `val_accuracy` which is not available. Available metrics are: loss,accuracy,lr  
+Epoch 4/10
+604/604 [==============================] - 2950s 5s/step - loss: 0.0853 - accuracy: 0.9742
+WARNING:tensorflow:Early stopping conditioned on metric `val_loss` which is not available. Available metrics are: loss,accuracy
+WARNING:tensorflow:Learning rate reduction is conditioned on metric `val_accuracy` which is not available. Available metrics are: loss,accuracy,lr  
+Epoch 5/10
+604/604 [==============================] - 2948s 5s/step - loss: 0.0894 - accuracy: 0.9813 
+WARNING:tensorflow:Early stopping conditioned on metric `val_loss` which is not available. Available metrics are: loss,accuracy
+WARNING:tensorflow:Learning rate reduction is conditioned on metric `val_accuracy` which is not available. Available metrics are: loss,accuracy,lr  
+Epoch 6/10
+604/604 [==============================] - 2936s 5s/step - loss: 0.0706 - accuracy: 0.9817
+WARNING:tensorflow:Early stopping conditioned on metric `val_loss` which is not available. Available metrics are: loss,accuracy
+WARNING:tensorflow:Learning rate reduction is conditioned on metric `val_accuracy` which is not available. Available metrics are: loss,accuracy,lr  
+Epoch 7/10
+604/604 [==============================] - 2946s 5s/step - loss: 0.1273 - accuracy: 0.9805 
+WARNING:tensorflow:Early stopping conditioned on metric `val_loss` which is not available. Available metrics are: loss,accuracy
+WARNING:tensorflow:Learning rate reduction is conditioned on metric `val_accuracy` which is not available. Available metrics are: loss,accuracy,lr  
+Epoch 8/10
+604/604 [==============================] - 2968s 5s/step - loss: 0.0508 - accuracy: 0.9862
+WARNING:tensorflow:Early stopping conditioned on metric `val_loss` which is not available. Available metrics are: loss,accuracy
+WARNING:tensorflow:Learning rate reduction is conditioned on metric `val_accuracy` which is not available. Available metrics are: loss,accuracy,lr  
+Epoch 9/10
+604/604 [==============================] - 2950s 5s/step - loss: 0.0626 - accuracy: 0.9861
+WARNING:tensorflow:Early stopping conditioned on metric `val_loss` which is not available. Available metrics are: loss,accuracy
+WARNING:tensorflow:Learning rate reduction is conditioned on metric `val_accuracy` which is not available. Available metrics are: loss,accuracy,lr  
+Epoch 10/10
+ 64/604 [==>...........................] - ETA: 43:20 - loss: 0.0524 - accuracy: 0.9826WARNING:tensorflow:Your input ran out of data; interrupting training. Make sure that your dataset or generator can generate at least `steps_per_epoch * epochs` batches (in this case, 6040 batches). You may need to use the repeat() function when building your dataset.
+604/604 [==============================] - 308s 503ms/step - loss: 0.0388 - accuracy: 0.9879
+
+Fix warnings and continue from saved model
+Traininng  middle layers
+
+Epoch 1/10
+604/604 [==============================] - ETA: 0s - loss: 0.0676 - accuracy: 0.9920WARNING:tensorflow:Your input ran out of data; interrupting training. Make sure that your dataset or generator can generate at least `steps_per_epoch * epochs` batches (in this case, 151 batches). You may need to use the repeat() function when building your dataset.
+604/604 [==============================] - 3160s 5s/step - loss: 0.0676 - accuracy: 0.9920 - val_loss: 0.0355 - val_accuracy: 0.9868
+Epoch 2/10
+604/604 [==============================] - 4399s 7s/step - loss: 0.0245 - accuracy: 0.9922
+Epoch 3/10
+604/604 [==============================] - 4296s 7s/step - loss: 0.0334 - accuracy: 0.9952
+Epoch 4/10
+604/604 [==============================] - 3655s 6s/step - loss: 0.0245 - accuracy: 0.9949
+Epoch 5/10
+604/604 [==============================] - 3673s 6s/step - loss: 0.0444 - accuracy: 0.9955
+Epoch 6/10
+604/604 [==============================] - 3966s 7s/step - loss: 0.0217 - accuracy: 0.9934
+
+Epoch 00006: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+Epoch 7/10
+604/604 [==============================] - 3837s 6s/step - loss: 0.0785 - accuracy: 0.9972
+Epoch 8/10
+604/604 [==============================] - 2995s 5s/step - loss: 0.0437 - accuracy: 0.9990
+Epoch 9/10
+604/604 [==============================] - 2964s 5s/step - loss: 0.0993 - accuracy: 0.9973 
+Epoch 10/10
+ 64/604 [==>...........................] - ETA: 43:36 - loss: 0.0035 - accuracy: 0.9989WARNING:tensorflow:Your input ran out of data; interrupting training. Make sure that your dataset or generator can generate at least `steps_per_epoch * epochs` batches (in this case, 6040 batches). You may need to use the repeat() function when building your dataset.
+604/604 [==============================] - 311s 507ms/step - loss: 0.0044 - accuracy: 0.9986
+
+Final train of first third of neurons
+
+Epoch 1/10
+604/604 [==============================] - ETA: 0s - loss: 0.0018 - accuracy: 0.9998WARNING:tensorflow:Your input ran out of data; interrupting training. Make sure that your dataset or generator can generate at least `steps_per_epoch * epochs` batches (in this case, 151 batches). You may need to use the repeat() function when building your dataset.
+604/604 [==============================] - 2995s 5s/step - loss: 0.0018 - accuracy: 0.9998 - val_loss: 0.0738 - val_accuracy: 0.9947
+Epoch 2/10
+604/604 [==============================] - 2938s 5s/step - loss: 8.9963e-06 - accuracy: 1.0000
+Epoch 3/10
+444/604 [=====================>........] - ETA: 12:05 - loss: 5.3059e-05 - accuracy: 1.0000
+
+To be continued ...
