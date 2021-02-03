@@ -7,7 +7,7 @@ def build_model():
 
     x = base_model.output
     x = GlobalAveragePooling2D()(x)
-    
+
     x = Dense(1024, activation='relu')(x)
     x = Dense(512, activation='relu')(x)
     x = Dense(128, activation='relu')(x)

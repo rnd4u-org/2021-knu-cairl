@@ -4,11 +4,13 @@ import cv2
 from random import shuffle
 from tqdm import tqdm 
 
+
 def label_img(name):
     if "out" in name:
         return np.array([0, 1])
     else:
         return np.array([1, 0])
+
 
 def load_data():
     dirs = ["./data/with_mask", "./data/without_mask"]
@@ -32,14 +34,14 @@ def load_data():
         for img in tqdm(os.listdir(d)):
             label = label_img(img)
             path = os.path.join(d, img)
-            img = cv2.resize(cv2.imread(path), (size,size))
+            img = cv2.resize(cv2.imread(path), (size, size))
             images.append(np.array(img))
             labels.append(label)
             indexes.append(ind)
             ind += 1
 
     shuffle(indexes)
-    n = len(images)*4//5
+    n = len(images) * 4 // 5
 
     x_train = [images[i] for i in indexes[:n]]
     x_test = [images[i] for i in indexes[n:]]
