@@ -31,7 +31,7 @@ def create_data():
     x_test = []
     y_test = []
 
-    for image in data[:int(test_size*len(data))]:
+    for image in data[:int(test_size * len(data))]:
         x_test.append(image[0])
         y_test.append(image[1])
 
