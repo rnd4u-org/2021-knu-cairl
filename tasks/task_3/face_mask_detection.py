@@ -7,11 +7,8 @@ Original file is located at
     https://colab.research.google.com/drive/1v_rhcXflaGq1dTBdZBGLUT_3Blvcst8n
 """
 
-import numpy as np
-import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow.keras import layers
-from google.colab import files
 from zipfile import ZipFile
 
 file_name = 'face-mask-dataset.zip'

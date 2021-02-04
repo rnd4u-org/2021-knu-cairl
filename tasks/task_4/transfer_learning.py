@@ -7,11 +7,8 @@ Original file is located at
     https://colab.research.google.com/drive/1D6jeElG89lWDH-1F2bHo_q6PO2lZ2Rtu
 """
 
-import numpy as np
-import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow.keras import layers
-from google.colab import files
 from zipfile import ZipFile
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.applications import DenseNet169
