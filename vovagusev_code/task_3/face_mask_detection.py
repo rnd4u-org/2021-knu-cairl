@@ -318,6 +318,24 @@ for images, labels in test_data.take(1):
 scores = model_3.evaluate(test_data, verbose=0)
 print(scores[1] * 100)
 
+"""**Fine tuning**
+
+Let's unfreeze last VGG16's convolutional block
+"""
+
+VGG16_model.trainable = True
+trainable = False
+for layer in VGG16_model.layers:
+    if layer.name == 'block5_conv1':
+        trainable = True
+    layer.trainable = trainable
+
+model_3.summary()
+
+model_3.compile(loss='binary_crossentropy', optimizer=Adam(lr=1e-5), metrics=['accuracy'])
+
+model_3.fit(train_data, validation_data=test_data, epochs=5)
+
 """**VGG19**"""
 
 VGG19_model = VGG19(weights='imagenet', include_top=False, input_shape=(200, 200, 3))
@@ -375,6 +393,24 @@ for images, labels in test_data.take(1):
 
 scores = model_4.evaluate(test_data, verbose=0)
 print(scores[1] * 100)
+
+"""**Fine tuning**
+
+Let's unfreeze last VGG19's convolutional block
+"""
+
+VGG19_model.trainable = True
+trainable = False
+for layer in VGG19_model.layers:
+    if layer.name == 'block5_conv1':
+        trainable = True
+    layer.trainable = trainable
+
+model_4.summary()
+
+model_4.compile(loss='binary_crossentropy', optimizer=Adam(lr=1e-5), metrics=['accuracy'])
+
+model_4.fit(train_data, validation_data=test_data, epochs=5)
 
 """**InceptionV3**"""
 
@@ -491,6 +527,24 @@ for images, labels in test_data.take(1):
 
 scores = model_6.evaluate(test_data, verbose=0)
 print(scores[1] * 100)
+
+"""**Fine tuning**
+
+Let's unfreeze last ResNet50's convolutional block
+"""
+
+ResNet50_model.trainable = True
+trainable = False
+for layer in ResNet50_model.layers:
+    if layer.name == 'block5_conv1':
+        trainable = True
+    layer.trainable = trainable
+
+model_6.summary()
+
+model_6.compile(loss='binary_crossentropy', optimizer=Adam(lr=1e-5), metrics=['accuracy'])
+
+model_6.fit(train_data, validation_data=test_data, epochs=3)
 
 """**InceptionV4/InceptionResNet**"""
 
