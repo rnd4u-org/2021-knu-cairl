@@ -19,7 +19,7 @@ from scipy.spatial import distance
 from keras.models import load_model
 from google.colab import files
 
-files.upload()
+# files.upload()
 
 image_dir_basepath = 'images/'
 names = ['ElonMusk', 'MarkZuckerberg', 'BillGates']
@@ -30,6 +30,7 @@ image_size = 160
 model = load_model('facenet_keras.h5')
 
 """This functions normalize picture."""
+
 
 def prewhiten(x):
     if x.ndim == 4:
@@ -47,11 +48,14 @@ def prewhiten(x):
     y = (x - mean) / std_adj
     return y
 
+
 def l2_normalize(x, axis=-1, epsilon=1e-10):
     output = x / np.sqrt(np.maximum(np.sum(np.square(x), axis=axis, keepdims=True), epsilon))
     return output
 
+
 """This function makes cropping and aligning images."""
+
 
 def load_and_align_images(filepaths, margin):
     cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt2.xml')
@@ -71,7 +75,9 @@ def load_and_align_images(filepaths, margin):
 
     return np.array(aligned_images)
 
+
 """This function calculates embedding vector."""
+
 
 def calc_embs(filepaths, margin=10, batch_size=1):
     aligned_images = prewhiten(load_and_align_images(filepaths, margin))
@@ -82,12 +88,16 @@ def calc_embs(filepaths, margin=10, batch_size=1):
 
     return embs
 
+
 """This function measures Euclidean distance between two vectors."""
+
 
 def calc_dist(pos1, pos2):
     return distance.euclidean(pos1, pos2)
 
+
 """This fucntion plots two images"""
+
 
 def plot_images(img1, img2):
     plt.subplot(1, 2, 1)
@@ -95,7 +105,9 @@ def plot_images(img1, img2):
     plt.subplot(1, 2, 2)
     plt.imshow(imread(data[img2]['image_filepath']))
 
+
 """This function checks for similarity of two pictures"""
+
 
 def is_similar(img1, img2, threshold=0.75):
     plot_images(img1, img2)
@@ -109,6 +121,7 @@ def is_similar(img1, img2, threshold=0.75):
         return True
     else:
         return False
+
 
 """Getting all embedding vectors for the pictures."""
 
