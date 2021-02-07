@@ -13,8 +13,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import cv2
 from sklearn.decomposition import PCA
-from mpl_toolkits.mplot3d import Axes3D
-from mpl_toolkits.mplot3d import proj3d
 from imageio import imread
 from skimage.transform import resize
 from scipy.spatial import distance
@@ -33,6 +31,7 @@ model = load_model('facenet_keras.h5')
 
 """This functions normalize picture."""
 
+
 def prewhiten(x):
     if x.ndim == 4:
         axis = (1, 2, 3)
@@ -45,26 +44,22 @@ def prewhiten(x):
 
     mean = np.mean(x, axis=axis, keepdims=True)
     std = np.std(x, axis=axis, keepdims=True)
-    std_adj = np.maximum(std, 1.0/np.sqrt(size))
+    std_adj = np.maximum(std, 1.0 / np.sqrt(size))
     y = (x - mean) / std_adj
     return y
+
 
 def l2_normalize(x, axis=-1, epsilon=1e-10):
     output = x / np.sqrt(np.maximum(np.sum(np.square(x), axis=axis, keepdims=True), epsilon))
     return output
 
-"""This function displays an image"""
-
-def display_image(image):
-  fig = plt.figure(figsize=(20, 15))
-  plt.grid(False)
-  plt.imshow(image)
 
 """This function makes cropping and aligning images."""
 
+
 def load_and_align_images(filepaths, margin):
     cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt2.xml')
-    
+
     aligned_images = []
     for filepath in filepaths:
         img = imread(filepath)
@@ -73,30 +68,36 @@ def load_and_align_images(filepaths, margin):
                                          scaleFactor=1.1,
                                          minNeighbors=3)
         (x, y, w, h) = faces[0]
-        cropped = img[y-margin//2:y+h+margin//2,
-                      x-margin//2:x+w+margin//2, :]
+        cropped = img[y - margin // 2:y + h + margin // 2,
+                      x - margin // 2:x + w + margin // 2, :]
         aligned = resize(cropped, (image_size, image_size), mode='reflect')
         aligned_images.append(aligned)
 
     return np.array(aligned_images)
 
+
 """This function calculates embedding vector."""
+
 
 def calc_embs(filepaths, margin=10, batch_size=1):
     aligned_images = prewhiten(load_and_align_images(filepaths, margin))
     pd = []
     for start in range(0, len(aligned_images), batch_size):
-        pd.append(model.predict_on_batch(aligned_images[start:start+batch_size]))
+        pd.append(model.predict_on_batch(aligned_images[start:start + batch_size]))
     embs = l2_normalize(np.concatenate(pd))
 
     return embs
 
+
 """This function measures Euclidean distance between two vectors."""
+
 
 def calc_dist(pos1, pos2):
     return distance.euclidean(pos1, pos2)
 
+
 """This fucntion plots two images"""
+
 
 def plot_images(img1, img2):
     plt.subplot(1, 2, 1)
@@ -104,7 +105,9 @@ def plot_images(img1, img2):
     plt.subplot(1, 2, 2)
     plt.imshow(imread(data[img2]['image_filepath']))
 
+
 """This function checks for similarity of two pictures"""
+
 
 def is_similar(img1, img2, threshold=0.75):
     plot_images(img1, img2)
@@ -119,7 +122,9 @@ def is_similar(img1, img2, threshold=0.75):
     else:
         return False
 
+
 """Getting all embedding vectors for the pictures."""
+
 
 data = {}
 for name in names:
@@ -127,8 +132,8 @@ for name in names:
     image_filepaths = [os.path.join(image_dirpath, f) for f in os.listdir(image_dirpath)]
     embs = calc_embs(image_filepaths)
     for i in range(len(image_filepaths)):
-        data['{}{}'.format(name, i)] = {'image_filepath' : image_filepaths[i],
-                                        'emb' : embs[i]}
+        data['{}{}'.format(name, i)] = {'image_filepath':image_filepaths[i],
+                                        'emb':embs[i]}
 
 """Some examples"""
 
@@ -159,19 +164,19 @@ for k, v in data.items():
         X_ElonMusk.append(v['emb'])
     elif 'Mark' in k:
         X_MarkZuckerberg.append(v['emb'])
-        
+ 
 Xd_BillGates = pca.transform(X_BillGates)
 Xd_ElonMusk = pca.transform(X_ElonMusk)
 Xd_MarkZuckerberg = pca.transform(X_MarkZuckerberg)
 
-fig = plt.figure(figsize=(8,8))
+fig = plt.figure(figsize=(8, 8))
 ax = fig.add_subplot(111, projection='3d')
 plt.rcParams['legend.fontsize'] = 10   
-ax.plot(Xd_BillGates[:,0], Xd_BillGates[:,1], Xd_BillGates[:,2],
+ax.plot(Xd_BillGates[:, 0], Xd_BillGates[:, 1], Xd_BillGates[:, 2],
         'o', markersize=8, color='blue', alpha=0.5, label='BillGates')
-ax.plot(Xd_ElonMusk[:,0], Xd_ElonMusk[:,1], Xd_ElonMusk[:,2],
+ax.plot(Xd_ElonMusk[:, 0], Xd_ElonMusk[:, 1], Xd_ElonMusk[:, 2],
         'o', markersize=8, color='red', alpha=0.5, label='ElonMusk')
-ax.plot(Xd_MarkZuckerberg[:,0], Xd_MarkZuckerberg[:,1], Xd_MarkZuckerberg[:,2],
+ax.plot(Xd_MarkZuckerberg[:, 0], Xd_MarkZuckerberg[:, 1], Xd_MarkZuckerberg[:, 2],
         'o', markersize=8, color='green', alpha=0.5, label='MarkZuckerberg')
 
 plt.title('Embedding Vector')
