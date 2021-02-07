@@ -17,7 +17,7 @@ from imageio import imread
 from skimage.transform import resize
 from scipy.spatial import distance
 from keras.models import load_model
-from google.colab import files
+# from google.colab import files
 
 # files.upload()
 
@@ -131,8 +131,8 @@ for name in names:
     image_filepaths = [os.path.join(image_dirpath, f) for f in os.listdir(image_dirpath)]
     embs = calc_embs(image_filepaths)
     for i in range(len(image_filepaths)):
-        data['{}{}'.format(name, i)] = {'image_filepath' : image_filepaths[i],
-                                        'emb' : embs[i]}
+        data['{}{}'.format(name, i)] = {'image_filepath': image_filepaths[i],
+                                        'emb': embs[i]}
 
 """Some examples"""
 
