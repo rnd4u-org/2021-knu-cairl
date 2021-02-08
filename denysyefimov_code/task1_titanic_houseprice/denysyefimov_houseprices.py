@@ -141,3 +141,4 @@ if __name__ == '__main__':
     submission['SalePrice'] = final_predictions
     submission.head()
     submission.to_csv('submission1.csv', index=False)
+
