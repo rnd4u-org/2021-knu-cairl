@@ -1,0 +1,120 @@
+1 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.517565131187439], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.8778752088546753], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.28460147976875305], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.8960264921188354], 'step': 0}]}}}
+score: 0.8960264921188354
+
+2 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.6755658388137817], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.640906810760498], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.6557091474533081], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.6900662183761597], 'step': 0}]}}}
+score: 0.6900662183761597
+
+3 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.43988722562789917], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.9091510772705078], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.3098181188106537], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.9145695567131042], 'step': 0}]}}}
+score: 0.9145695567131042
+
+4 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.5314217209815979], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.8613271713256836], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.3702387809753418], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.878145694732666], 'step': 0}]}}}
+score: 0.878145694732666
+
+5 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.5134807229042053], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.8576865792274475], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.37029528617858887], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.8721854090690613], 'step': 0}]}}}
+score: 0.8721854090690613
+
+6 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.6944428086280823], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.8555353283882141], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.6856627464294434], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.8556291460990906], 'step': 0}]}}}
+score: 0.8556291460990906
+
+7 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.44080615043640137], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.883336067199707], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.27165472507476807], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.8900662064552307], 'step': 0}]}}}
+score: 0.8900662064552307
+
+8 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.47215789556503296], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.8778752088546753], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.30887502431869507], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.8768212199211121], 'step': 0}]}}}
+score: 0.8768212199211121
+
+9 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.6760485172271729], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.7871918082237244], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.6525512933731079], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.8231788277626038], 'step': 0}]}}}
+score: 0.8231788277626038
+
+10 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.49988970160484314], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.8692702054977417], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.34235015511512756], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.8834437131881714], 'step': 0}]}}}
+score: 0.8834437131881714
+
+11 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.6665294170379639], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.6789674162864685], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.634369432926178], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.7152317762374878], 'step': 0}]}}}
+score: 0.7152317762374878
+
+12 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.5008093118667603], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.8790335655212402], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.34613117575645447], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.8814569711685181], 'step': 0}]}}}
+score: 0.8814569711685181
+
+13 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.6921001672744751], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.8755584955215454], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.6828383803367615], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.8754966855049133], 'step': 0}]}}}
+score: 0.8754966855049133
+
+14 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.5217590928077698], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.894092321395874], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.3539324402809143], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.9033112525939941], 'step': 0}]}}}
+score: 0.9033112525939941
+
+15 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.5118488669395447], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.8571901321411133], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.41935527324676514], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.865562915802002], 'step': 0}]}}}
+score: 0.865562915802002
+
+16 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.5413548350334167], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.922389566898346], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.34384459257125854], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.9165562987327576], 'step': 0}]}}}
+score: 0.9165562987327576
+
+17 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.6866899728775024], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.7708091735839844], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.6696961522102356], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.8231788277626038], 'step': 0}]}}}
+score: 0.8231788277626038
+
+18 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.4633551239967346], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.8883005380630493], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.26650261878967285], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.9039735198020935], 'step': 0}]}}}
+score: 0.9039735198020935
+
+19 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.5202623605728149], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.9036902189254761], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.4311300218105316], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.8966887593269348], 'step': 0}]}}}
+score: 0.8966887593269348
+
+20 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.5793002247810364], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.8548734188079834], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.40468114614486694], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.8834437131881714], 'step': 0}]}}}
+score: 0.8834437131881714
+
+21 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.6710097193717957], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.7031275629997253], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.6361395120620728], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.7543046474456787], 'step': 0}]}}}
+score: 0.7543046474456787
+
+22 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.4336754083633423], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.9278504252433777], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.3586457371711731], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.9165562987327576], 'step': 0}]}}}
+score: 0.9165562987327576
+
+23 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.46024826169013977], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.9197418689727783], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.3174518942832947], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.9125827550888062], 'step': 0}]}}}
+score: 0.9125827550888062
+
+24 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.5560460090637207], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.9036902189254761], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.3706013560295105], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.9046357870101929], 'step': 0}]}}}
+score: 0.9046357870101929
+
+25 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.6939303874969482], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.6286612749099731], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.6873336434364319], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.7205297946929932], 'step': 0}]}}}
+score: 0.7205297946929932
+
+26 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.43818390369415283], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.9238788485527039], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.28707796335220337], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.9119205474853516], 'step': 0}]}}}
+score: 0.9119205474853516
+
+27 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.5279895663261414], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.8571901321411133], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.3609880805015564], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.8854304552078247], 'step': 0}]}}}
+score: 0.8854304552078247
+
+28 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.4643488824367523], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.9394340515136719], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.31463563442230225], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.9139072895050049], 'step': 0}]}}}
+score: 0.9139072895050049
+
+29 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.4549124836921692], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.889293372631073], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.27763280272483826], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.8933774828910828], 'step': 0}]}}}
+score: 0.8933774828910828
+
+30 model
+metrics: {'metrics': {'loss': {'direction': 'min', 'observations': [{'value': [0.6735646724700928], 'step': 0}]}, 'accuracy': {'direction': 'max', 'observations': [{'value': [0.7860334515571594], 'step': 0}]}, 'val_loss': {'direction': 'min', 'observations': [{'value': [0.6475100517272949], 'step': 0}]}, 'val_accuracy': {'direction': 'max', 'observations': [{'value': [0.8072847723960876], 'step': 0}]}}}
+score: 0.8072847723960876
+
