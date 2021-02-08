@@ -17,8 +17,8 @@ if __name__ == '__main__':
 
     # add data in file
 
-    train = pd.read_csv('../input/house-prices-advanced-regression-techniques/train.csv')
-    test = pd.read_csv('../input/house-prices-advanced-regression-techniques/test.csv')
+    train = pd.read_csv('path')
+    test = pd.read_csv('path')
 
     # making some changes
 
@@ -58,7 +58,8 @@ if __name__ == '__main__':
 
     # Now let's check all NULL
 
-    nulls = pd.DataFrame(train.isnull().sum().sort_values(ascending=False)[:25])
+    nulls = pd.DataFrame(train.isnull().
+                         sum().sort_values(ascending=False)[:25])
     print(nulls)
 
     # Now let's chek data without numbers(non-numeric)
@@ -119,8 +120,9 @@ if __name__ == '__main__':
     plt.xlabel('Predicted Price')
     plt.ylabel('Actual Price')
     plt.title('Ridge Regularization with alpha = {}'.format(alpha))
-    overlay = 'R^2 is: {}\nRMSE is: {}'.format(ridge_model.score(X_test, y_test),
-                                               mean_squared_error(y_test, preds_ridge))
+    overlay = 'R^2 is: {}\nRMSE is: {}'.\
+        format(ridge_model.score(X_test, y_test),
+               mean_squared_error(y_test, preds_ridge))
     plt.annotate(s=overlay,
                  xy=(12.1, 10.6),
                  size='x-large'
@@ -139,4 +141,3 @@ if __name__ == '__main__':
     submission['SalePrice'] = final_predictions
     submission.head()
     submission.to_csv('submission1.csv', index=False)
-    print("R^2 is: \n", model.score(X_test, y_test))
