@@ -32,9 +32,9 @@ validation_dataset = image_dataset_from_directory(input_path,
                                                   image_size=IMG_SIZE)
 
 validation_batches = tf.data.experimental.cardinality(validation_dataset)
-test_dataset = validation_dataset.take(validation_batches//validation_koef)
+test_dataset = validation_dataset.take(validation_batches // validation_koef)
 validation_dataset = validation_dataset.skip(
-    validation_batches//validation_koef)
+    validation_batches // validation_koef)
 
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 
@@ -51,7 +51,7 @@ data_change = tf.keras.Sequential([
         height_factor=0.1, width_factor=0.1)
 ])
 
-base_model = tf.keras.applications.EfficientNetB0(input_shape=IMG_SIZE+(3,),
+base_model = tf.keras.applications.EfficientNetB0(input_shape=IMG_SIZE + (3,),
                                                   include_top=False,
                                                   weights='imagenet',
                                                   drop_connect_rate=0.4)
@@ -63,7 +63,7 @@ model.add(tf.keras.layers.Dense(1))
 
 print(model.summary())
 
-input = tf.keras.Input(IMG_SIZE+(3,))
+input = tf.keras.Input(IMG_SIZE + (3,))
 x = base_model(data_change(input), training=False)
 x = tf.keras.layers.GlobalAveragePooling2D()(x)
 x = tf.keras.layers.Dropout(0.2)(x)
