@@ -4,6 +4,7 @@ from model import build_model
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau
 from tensorflow.keras.optimizers import SGD
 
+
 def train():
     x_train, x_test, y_train, y_test = load_data()
     model = build_model()
@@ -48,6 +49,7 @@ def train():
     print(history)
     print(model.summary())
 
+
 def evaluate(name):
     model = tf.keras.models.load_model(name)
     print(len(model.layers))
@@ -55,6 +57,7 @@ def evaluate(name):
     print("Evaluate on test data")
     results = model.evaluate(x_test, y_test)
     print("test loss, test acc:", results)
+
 
 if __name__ == "__main__":
     train()
