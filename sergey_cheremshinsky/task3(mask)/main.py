@@ -6,11 +6,6 @@ from tensorflow.keras.optimizers import SGD
 
 def train():
     x_train, x_test, y_train, y_test = load_data()
-    # print(x_train.shape)
-    # print(x_test.shape)
-    # print(y_train.shape)
-    # print(y_test.shape)
-    # exit()
     model = build_model()
     size = len(model.layers)
     steps = 3

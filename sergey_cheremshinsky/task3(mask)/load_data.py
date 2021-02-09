@@ -1,7 +1,6 @@
 import numpy as np
 import os
 import cv2
-from random import shuffle
 from sklearn.model_selection import train_test_split
 from tqdm import tqdm 
 
@@ -27,10 +26,8 @@ def load_data():
     except FileNotFoundError:
         pass
 
-    indexes = []
     images = []
     lables = []
-    ind = 0
     for d in dirs:
         for img in tqdm(os.listdir(d)):
             lable = lable_img(img)
@@ -38,11 +35,6 @@ def load_data():
             img = cv2.resize(cv2.imread(path), (size, size))
             images.append(np.array(img))
             lables.append(lable)
-            indexes.append(ind)
-            ind += 1
-
-    shuffle(indexes)
-    n = len(images) * 4 // 5
 
     x_train, x_test, y_train, y_test = train_test_split(images, lables, test_size=0.2)
 
