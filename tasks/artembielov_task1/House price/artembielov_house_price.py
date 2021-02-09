@@ -8,7 +8,7 @@ from sklearn.linear_model import LinearRegression
 from mlxtend.regressor import StackingRegressor
 
 
-path = 'D:/projects/Python/Samsung2/House price/data/'
+path = '...'
 test = pd.read_csv(path + 'test.csv')
 train = pd.read_csv(path + 'train.csv')
 
