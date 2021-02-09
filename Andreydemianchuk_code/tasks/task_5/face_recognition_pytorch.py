@@ -7,14 +7,11 @@ Original file is located at
     https://colab.research.google.com/drive/1yIsT0-cWXJY2Kj7liHjUTMQLgqS3C16s
 """
 
-#!pip install facenet-pytorch
 
 from facenet_pytorch import MTCNN, InceptionResnetV1
 import torch
 from torch.utils.data import DataLoader
 from torchvision import datasets
-import numpy as np
-import pandas as pd
 import os
 import matplotlib.pyplot as plt
 workers = 0 if os.name == 'nt' else 4
@@ -45,17 +42,20 @@ resnet = InceptionResnetV1(pretrained='vggface2').eval().to(device)
 We add the `idx_to_class` attribute to the dataset to enable easy recoding of label indices to identity names later on.
 """
 
+
 def collate_fn(x):
     return x[0]
 
+
 dataset = datasets.ImageFolder('images')
-dataset.idx_to_class = {i:c for c, i in dataset.class_to_idx.items()}
+dataset.idx_to_class = {i: c for c, i in dataset.class_to_idx.items()}
 loader = DataLoader(dataset, collate_fn=collate_fn, num_workers=workers)
 
 """#### Perfom MTCNN facial detection
 
 #### Calculate image embeddings and check the difference
 """
+
 
 def is_same_person(x1, x2):
     plt.subplot(1, 2, 1)
@@ -72,6 +72,7 @@ def is_same_person(x1, x2):
         print("It's the same person")
     else:
       print("It's not the same person")
+
 
 images = []
 
