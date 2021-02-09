@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
 
-path = 'D:/projects/Python/Samsung2/Titanic/data/'
+path = '...'
 
 train_data = pd.read_csv(path + "train.csv")
 test_data = pd.read_csv(path + "test.csv")
