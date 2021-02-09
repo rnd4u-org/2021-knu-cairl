@@ -31,7 +31,7 @@ if __name__ == "__main__":
             if arr[i] == 0:
                 for person in people:
                     pos = sum(connections[i][j] for j in person)
-                    if (pos > len(person) // 2 and pos > 1) or (pos == 1 and len(person) == 1):
+                    if pos >= (len(person) + 1) // 2:
                         person.append(i)
                         arr[i] = 1
                         break
