@@ -71,7 +71,7 @@ def is_same_person(x1, x2):
     if dist < 0.75:
         print("It's the same person")
     else:
-      print("It's not the same person")
+        print("It's not the same person")
 
 
 images = []
