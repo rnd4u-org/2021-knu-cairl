@@ -1,5 +1,10 @@
-import face_recognition
-import matplotlib.pyplot as plt
+# 1 Create folder ./data/image/
+# 2 Put there your images
+# Then code will get faces from 
+# that data and split them
+# into few dirs for each person
+# that will be detected
+
 import os
 from PIL import Image
 from load_faces import generate_faces, load_faces, compare

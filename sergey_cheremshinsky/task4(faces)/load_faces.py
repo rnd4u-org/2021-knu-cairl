@@ -3,6 +3,7 @@ import os
 from tqdm import tqdm
 from PIL import Image
 
+
 def get_faces(image):
     face_locations = face_recognition.face_locations(image)
     im = []
@@ -10,9 +11,11 @@ def get_faces(image):
         im.append(image[loc[0]:loc[2], loc[3]:loc[1]])
     return im
 
+
 def compare(e1, e2):
     results = face_recognition.compare_faces([e1], e2)
     return results[0]
+
 
 def generate_faces(imagesPath="./data/images", facesPath="./data/faces"):
     try:
@@ -27,8 +30,9 @@ def generate_faces(imagesPath="./data/images", facesPath="./data/faces"):
         faces = get_faces(image)
         for face in faces:
             jpg = Image.fromarray(face)
-            jpg.save(os.path.join(facesPath,"face"+str(i)+".jpg"))
+            jpg.save(os.path.join(facesPath, "face" + str(i) + ".jpg"))
             i += 1
+
 
 def load_faces(faces, facesPath="./data/faces"):
     print("loading faces")
